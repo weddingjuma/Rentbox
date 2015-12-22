@@ -2,7 +2,7 @@
 
 Yleisiä linkkejä:
 * [Linkki sovellukseeni](http://jussivii.users.cs.helsinki.fi/tsoha/)
-* [Linkki dokumentaatiooni](https://www.github.com)
+* [Linkki dokumentaatiooni](https://github.com/eeaa/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
 Käyttöliittymän staattiset sivut:
 * [Kirjautumissivu](http://jussivii.users.cs.helsinki.fi/tsoha/)
