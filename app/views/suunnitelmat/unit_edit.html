@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container container-padding">
+    <div class="row">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{base_path}}/user/unit" class="float-right btn btn-xs btn-default">Save edits</a>
+                <strong><textarea class="textarea edit" rows="1" cols="30" maxlength="30">Big room</textarea></strong><br> 
+            </div>
+        </div>
+        <small>15 m² | 500 € | available from 31.12.2016</small>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-4 col-md-3 unitlist">
+                        <div class="thumbnail">
+                            <img src="{{base_path}}/assets/img/roomthumb.jpg">
+                            <div class="caption">
+                                <textarea class="textarea-fullwidth edit" rows="4" maxlength="50">The atmosphere of Florence and Venice.</textarea>
+                            </div>
+                            <span class="glyphicon glyphicon-remove image-remove" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-3 unitlist">
+                        <div class="thumbnail">
+                            <img src="{{base_path}}/assets/img/roomthumb.jpg">
+                            <div class="caption">
+                                <textarea class="textarea-fullwidth edit" rows="4" maxlength="50">The atmosphere of Florence and Venice.</textarea>
+                            </div>
+                            <span class="glyphicon glyphicon-remove image-remove" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-3 unitlist">
+                        <div class="thumbnail">
+                            <img src="{{base_path}}/assets/img/roomthumb.jpg">
+                            <div class="caption">
+                                <textarea class="textarea-fullwidth edit" rows="4" maxlength="50">The atmosphere of Florence and Venice.</textarea>
+                            </div>
+                            <span class="glyphicon glyphicon-remove image-remove" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-3 unitlist">
+                        <div class="thumbnail">
+                            <img src="{{base_path}}/assets/img/roomthumb.jpg">
+                            <div class="caption">
+                                <textarea class="textarea-fullwidth edit" rows="4" maxlength="50">The atmosphere of Florence and Venice.</textarea>
+                            </div>
+                            <span class="glyphicon glyphicon-remove image-remove" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-3 unitlist">
+                        <div class="thumbnail">
+                            <img src="{{base_path}}/assets/img/roomthumb.jpg">
+                            <div class="caption">
+                                <textarea class="textarea-fullwidth edit" rows="4" maxlength="50">The atmosphere of Florence and Venice.</textarea>
+                            </div>
+                            <span class="glyphicon glyphicon-remove image-remove" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-3 unitlist">
+                        <div class="thumbnail">
+                            <img src="{{base_path}}/assets/img/roomthumb.jpg">
+                            <div class="caption">
+                                <textarea class="textarea-fullwidth edit" rows="4" maxlength="50">The atmosphere of Florence and Venice.</textarea>
+                            </div>
+                            <span class="glyphicon glyphicon-remove image-remove" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-3 unitlist">
+                        <div class="thumbnail">
+                            <img src="{{base_path}}/assets/img/roomthumb.jpg">
+                            <div class="caption">
+                                <textarea class="textarea-fullwidth edit" rows="4" maxlength="50">The atmosphere of Florence and Venice.</textarea>
+                            </div>
+                            <span class="glyphicon glyphicon-remove image-remove" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-3 unitlist">
+                        <div class="thumbnail">
+                            <img src="{{base_path}}/assets/img/roomthumb.jpg">
+                            <div class="caption">
+                                <textarea class="textarea-fullwidth edit" rows="4" maxlength="50">The atmosphere of Florence and Venice.</textarea>
+                            </div>
+                            <span class="glyphicon glyphicon-remove image-remove" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 padding">
+
+                <textarea class="textarea-fullwidth edit" rows="8" maxlength="300">Juuri täysin remointoitu, hyvin varusteltu valoisa 1.krs yksiö. Tähän hyvin varusteltuun ilman remonttihuolia olevaan kotiin pääset muuttamaan nopeastikkin. Myös taloyhtiön suuret remontit jo tehty ; mm.linjastosaneeraus valm. v.2014. 
+
+Tule ihastumaan !
+                </textarea>
+
+                <address>
+                    <strong>Etunimi Sukunimi</strong><br>
+                    <a href="mailto:etunimi.sukunimi@maili.com">etunimi.sukunimi@maili.com</a><br>
+                    <a href="tel:555-555-5555">555-555-5555</a><br>
+                </address>
+
+
+
+                <table class="table table-striped">
+                    <tr>
+                        <td>Address</td>
+                        <td><textarea class="textarea text-right edit" rows="2" maxlength="100">Osoitekatu 32, 00100, Helsinki, Finland</textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Size</td>
+                        <td><textarea class="textarea text-right edit" rows="1" maxlength="4">15</textarea> m²</td>
+                    </tr>
+                    <tr>
+                        <td>Rent</td>
+                        <td><textarea class="textarea text-right edit" rows="1" maxlength="4">500</textarea> €</td>
+                    </tr>
+                    <tr>
+                        <td>Amenities</td>
+                        <td>
+                            <div class="checkbox margin-0">
+                                <label>
+                                    <input type="checkbox">Electricity
+                                </label><br>
+                                <label>
+                                    <input type="checkbox">Water
+                                </label><br>
+                                <label>
+                                    <input type="checkbox">Internet
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row padding">
+            <button type="button" class="btn btn-danger float-right">DELETE UNIT</button>
+            <button type="button" class="btn btn-primary">Upload photo</button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
