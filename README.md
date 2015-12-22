@@ -17,7 +17,7 @@ Käyttöliittymän staattiset sivut:
 
 Järjestelmällä hallitaan vuokra-asuntoportfoliota. 
 Järjestelmään rekisteröitynyt käyttäjä voi lisätä portfolioonsa vuokrakohteita. 
-Vuokrakohteisiin voi lisätä valokuvia, ja vuokrasopimuksia. 
+Vuokrakohteisiin voi lisätä valokuvia ja vuokrasopimuksia. 
 Vuokrasopimukseen sisältyy hinta, sopimuksen alkamis- ja loppumispäivät, sekä 
 vuokrattavan kohteen lisäksi hintaan kuuluvat muut hyödykkeet (sähkö, vesi, jne). 
 
