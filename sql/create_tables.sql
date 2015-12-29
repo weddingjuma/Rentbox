@@ -12,9 +12,10 @@ CREATE TABLE System_user
 CREATE TABLE Rental_unit
 (
 	id SERIAL PRIMARY KEY,
-	description_title varchar(255) NOT NULL,
-	description varchar(255),
 	address varchar(255) NOT NULL,
+        area numeric(15,6) NOT NULL,
+	description_title varchar(255),
+	description varchar(255),
 	advertised_rent numeric(15,6),
 	landlord int REFERENCES System_user(id)
 );

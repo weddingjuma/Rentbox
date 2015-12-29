@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container container-padding">
+
+
+
+    <div class="row">
+        {% for result in searchResults %}
+        <div class="col-xs-6 col-sm-4 col-md-3 unitlist">
+            <a href="{{base_path}}/user/unit">
+                <div class="thumbnail">
+                    <img src="{{base_path}}/assets/img/roomthumb.jpg">
+                    <div class="caption">
+                        <p>{{result.address}}</p>
+                        <h3>{{result.title}}</h3>
+                        {% if (result.available is null or date(result.available) < date()) %}
+                        <p>Available now</p>
+                        {% else %}
+                        <p>Available from: {{result.available}}</p>
+                        {% endif %}
+                        <p>Rent: {{result.advertised_rent|round}}€</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

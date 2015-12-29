@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container container-padding">
+    
+     <a href="/tsoha/units/new" class="btn btn-primary add-lease-button">Add new rental unit</a>
+
+    <div class="row">
+        {% for unit in portfolio %}
+        <div class="col-xs-6 col-sm-4 col-md-3 unitlist">
+            <a href="{{base_path}}/units/{{unit.id}}">
+                <div class="thumbnail">
+                    <img src="{{base_path}}/assets/img/roomthumb.jpg">
+                    <div class="caption">
+                        <p>{{unit.address}}</p>
+                        <h3>{{unit.title}}</h3>
+                        {% if unit.available is null %}
+                        <p>No leases yet</p>
+                        {% elseif date(unit.available) < date() %}
+                        <p>Vacant since: {{unit.available}}</p>
+                        {% else %}
+                        <p>Available from: {{unit.available}}</p>
+                        {% endif %}
+                        <p>Rent: {{unit.advertised_rent|round}}€</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+
+</div>
+
+{% endblock %}

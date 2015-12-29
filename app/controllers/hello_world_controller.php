@@ -1,5 +1,7 @@
 <?php
 
+//require 'app/models/rental_unit.php';
+
 class HelloWorldController extends BaseController {
 
     public static function index() {
@@ -9,7 +11,11 @@ class HelloWorldController extends BaseController {
 
     public static function sandbox() {
         // Testaa koodiasi täällä
-        View::make('helloworld.html');
+        //View::make('helloworld.html');
+        $room = RentalUnit::find(2);
+        $units = RentalUnit::searchAll();
+        Kint::dump($room);
+        Kint::dump($units);
     }
 
     public static function searchResults() {
