@@ -16,35 +16,17 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <!--                    <form class="navbar-form navbar-left" role="search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search for rentals in...">
-                                        <span class="input-group-btn">
-                                            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                        </span>
-                                    </div>
-                                </form>-->
-
             <p class="nav navbar-text">Log in to search for rentals or manage your portfolio</p> 
 
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <form class="navbar-form navbar-right" role="search">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Email">
-                        </div>
-                    </form>
-                </li>
-                <li>
-                    <form class="navbar-form navbar-right" role="search">
-                        <div class="input-group">
-                            <input type="password" class="form-control" placeholder="Password">
-                        </div>
-                    </form>
-                </li>
-                <li><a class="navbar-link" href="{{base_path}}/search">log in</a></li>
-                <!--<li> <button type="button" class="btn btn-success navbar-btn">Add rental unit</button></li>-->
-            </ul>
+            <form method="post" action="{{base_path}}/login" class="navbar-form navbar-right">
+                <div class="form-group">
+                    <input type="email" class="form-control" name="email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-default">Sign In</button>
+            </form>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>

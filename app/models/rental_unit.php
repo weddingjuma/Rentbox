@@ -89,22 +89,46 @@ class RentalUnit extends BaseModel {
         }
         return $rental_unit;
     }
-    
-    public function save(){
+
+    public function save($user_id) {
         $query = DB::connection()->prepare('INSERT INTO rental_unit '
-                . '(address, area, description_title, description, advertised_rent, landlord) '
-                . 'VALUES (:address, :area, :description_title, :description, :advertised_rent, :landlord) '
+                . '(address, area, landlord) '
+                . 'VALUES (:address, :area, :landlord) '
                 . 'RETURNING id');
         $query->execute(array(
-            'address'=>$this->address, 
-            'area'=>$this->area, 
-            'description_title'=>$this->title,
-            'description'=>$this->description,
-            'advertised_rent'=>$this->advertised_rent,
-            'landlord'=>1
-            ));
+            'address' => $this->address,
+            'area' => $this->area,
+            'landlord' => $user_id
+        ));
         $row = $query->fetch();
-        $this->id = $row['id'];        
+        $this->id = $row['id'];
+    }
+
+    public function validateAddress($address) {
+        $this->validate_string_length($address, 10);
+    }
+
+    public function updateUnit() {
+        $query = DB::connection()->prepare('UPDATE rental_unit '
+                . 'SET '
+                . 'advertised_rent = :advertised_rent, '
+                . 'description_title = :title, '
+                . 'description = :description '
+                . 'WHERE id = :id');
+        $query->execute(array(
+            'advertised_rent' => $this->advertised_rent,
+            'title' => $this->title,
+            'description' => $this->description,
+            'id' => $this->id
+        ));
+    }
+
+    public function delete() {
+        $query = DB::connection()->prepare('DELETE FROM rental_unit '
+                . 'WHERE id = :id');
+        $query->execute(array(
+            'id' => $this->id
+        ));
     }
 
 }

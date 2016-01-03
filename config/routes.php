@@ -1,7 +1,13 @@
 <?php
 
+
+
 $routes->get('/', function() {
     HelloWorldController::index();
+});
+
+$routes->post('/login', function() {
+    UserController::login();
 });
 
 $routes->get('/hiekkalaatikko', function() {
@@ -40,7 +46,17 @@ $routes->get('/units/:id/edit', function($id) {
     PortfolioController::editUnit($id);
 });
 
+$routes->post('/units/:id', function($id) {
+    PortfolioController::updateUnit($id);
+});
+
+$routes->post('/units/:id/delete', function($id) {
+    PortfolioController::delete($id);
+});
+
 $routes->get('/units/:id', function($id) {
     PortfolioController::viewUnit($id);
 });
+
+
 

@@ -25,5 +25,12 @@
 
       return $errors;
     }
+    
+    public function validate_string_length($string, $length){
+        if(strlen($string)<$length){
+            return false;
+        }
+        return true;
+    }
 
   }

@@ -2,6 +2,8 @@
 
 Yleisiä linkkejä:
 * [Linkki sovellukseeni](http://jussivii.users.cs.helsinki.fi/tsoha/)
+  * Käyttäjätunnus: vuokra.loordi@gmail.com
+  * Salasana: salaissana
 * [Linkki dokumentaatiooni](https://github.com/eeaa/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
 Käyttöliittymän staattiset sivut:

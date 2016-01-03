@@ -41,7 +41,7 @@ CREATE TABLE Lease
 	rent numeric(15,6) NOT NULL,
 	start_date date NOT NULL,
 	end_date date NOT NULL,
-	rental_unit int REFERENCES Rental_unit(id)
+	rental_unit int REFERENCES Rental_unit(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Amenity_lease
