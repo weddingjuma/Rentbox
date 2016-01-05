@@ -8,11 +8,13 @@
 
         <div class="row">
             <div class="col-md-12" style="padding-bottom:0.5em;">
+                {% if landlord.id == user.id %} 
                 <form method="post" action="{{base_path}}/units/{{unit.id}}/delete">
                     <button type="submit" class="btn btn-link float-right">
                         <span class="glyphicon glyphicon-trash" style="font-size: 1em;color:gray;"></span>
                     </button>
                 </form>
+                {% endif %}
                 <h4 style="display:inline;">{{unit.address}}, {{unit.area|round}} m²</h4>
             </div>
         </div>
@@ -33,9 +35,12 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h3 class="float-right" style="color:limegreen;">
-                                <textarea autofocus rows="1" cols="4" maxlength="4" class="textarea" style="text-align: right;padding-right:0.5em;" name="advertised_rent">{{unit.advertised_rent|round}}</textarea>                                
+                                {% if landlord.id == user.id %}  
+                                <textarea rows="1" cols="4" maxlength="4" class="textarea" style="text-align: right;padding-right:0.5em;" name="advertised_rent">{{unit.advertised_rent|round}}</textarea>                                 
+                                {% else %}
+                                <textarea disabled rows="1" cols="4" maxlength="4" class="textarea" style="text-align: right;padding-right:0.5em;" name="advertised_rent">{{unit.advertised_rent|round}}</textarea>                     
+                                {% endif %}
                                 € a month 
-                                <!--<span data-toggle="collapse" data-target="#setrent" class="glyphicon glyphicon-pencil" style="font-size: 0.6em;color:gray;"></span>-->
                             </h3>
                         </div>
                     </div>
@@ -57,12 +62,19 @@
                     <div class="row">
                         <div class="col-md-12">
                             <blockquote style="font-size: 1em;" class="clearfix">
+                                {% if landlord.id == user.id %}  
                                 <h4><textarea name="title" class="textarea-fullwidth" rows="1" cols="30" maxlength="30" placeholder="Enter title for your unit">{{unit.title}}</textarea></h4>
                                 <p><textarea name="description" class="textarea-fullwidth" rows="10" maxlength="1000" placeholder="Write description of your unit">{{unit.description}}</textarea></p>
+                                {% else %}
+                                <h4><textarea disabled name="title" class="textarea-fullwidth" rows="1" cols="30" maxlength="30" placeholder="Enter title for your unit">{{unit.title}}</textarea></h4>
+                                <p><textarea disabled name="description" class="textarea-fullwidth" rows="10" maxlength="1000" placeholder="Write description of your unit">{{unit.description}}</textarea></p>
+                                {% endif %}
                             </blockquote>
                         </div>
                     </div>
+                    {% if landlord.id == user.id %}  
                     <button class="btn btn-success" type="submit">Save changes</button>
+                    {% endif %}
                 </form>
 
             </div>
@@ -71,7 +83,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4>Basic information
+                             {% if landlord.id == user.id %} 
                             <small><span class="glyphicon glyphicon-pencil pull-right"></span></small>
+                            {% endif %}
                         </h4>               
                     </div>
                     <table class="table  table-condensed">
@@ -132,8 +146,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <address>
-                            <strong>Etunimi Sukunimi</strong><br>
-                            <a href="mailto:etunimi.sukunimi@maili.com">etunimi.sukunimi@maili.com</a><br>
+                            <strong>{{landlord.first_name}} {{landlord.last_name}}</strong><br>
+                            <a href="mailto:{{landlord.email}}">{{landlord.email}}</a><br>
                             <a href="tel:555-555-5555">555-555-5555</a><br>
                         </address>
                     </div>
@@ -145,8 +159,9 @@
 
     <hr>
 
+    {% if landlord.id == user.id %}
     {% include '/suunnitelmat/leases.html' %}
-
+    {% endif %}
 </div>
 
 {% endblock %}

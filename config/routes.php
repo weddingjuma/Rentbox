@@ -1,13 +1,7 @@
 <?php
 
-
-
 $routes->get('/', function() {
     HelloWorldController::index();
-});
-
-$routes->post('/login', function() {
-    UserController::login();
 });
 
 $routes->get('/hiekkalaatikko', function() {
@@ -24,6 +18,10 @@ $routes->get('/user/unit/edit', function() {
 
 $routes->get('/units/:id/lease', function() {
     HelloWorldController::lease();
+});
+
+$routes->post('/login', function() {
+    UserController::login();
 });
 
 $routes->get('/search', function() {
@@ -47,15 +45,18 @@ $routes->get('/units/:id/edit', function($id) {
 });
 
 $routes->post('/units/:id', function($id) {
-    PortfolioController::updateUnit($id);
+        PortfolioController::updateUnit($id);
 });
 
 $routes->post('/units/:id/delete', function($id) {
-    PortfolioController::delete($id);
+    if (RentalUnit::find($id)->landlord == BaseController::get_user_logged_in()->id) {
+        PortfolioController::delete($id);
+    }
+    RentalUnitController::viewUnit($id);
 });
 
 $routes->get('/units/:id', function($id) {
-    PortfolioController::viewUnit($id);
+    RentalUnitController::viewUnit($id);
 });
 
 

@@ -44,11 +44,6 @@ class PortfolioController extends BaseController {
         Redirect::to('/units', array('message' => 'rental unit deleted'));
     }
 
-    public static function viewUnit($id) {
-        $unit = RentalUnit::find($id);
-        View::make('portfolio/unit.html', array('unit' => $unit));
-    }
-
     public static function editUnit($id) {
         $unit = RentalUnit::find($id);
         View::make('portfolio/unit_edit.html', array('unit' => $unit));

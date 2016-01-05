@@ -17,4 +17,10 @@ class BaseController {
         // Jos käyttäjä ei ole kirjautunut sisään, ohjaa hänet toiselle sivulle (esim. kirjautumissivulle).
     }
 
+    public static function permission_to_modify($id) {
+        if (!RentalUnit::find($id)->landlord == self::get_user_logged_in()->id) {
+            Redirect::to('/units/' . $id, array('message' => 'insufficient rights'));
+        };
+    }
+
 }
