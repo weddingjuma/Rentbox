@@ -1,0 +1,36 @@
+
+<div class="row fullpage">
+    <a href="{{base_path}}/units/{{unit.id}}/leases/new" class="btn btn-primary add-lease-button" id="leases">Add new lease</a>
+
+    <table class="table table-striped">              
+        <tr>
+            <th>Created</th>
+            <th>Tenant</th>
+            <th>Rent</th> 
+            <th>From</th>
+            <th>Until</th>
+            <th></th>
+        </tr>
+        {% for lease in leases %}
+        <tr>
+            <td><a href="{{base_path}}/units/{{unit.id}}/leases/{{lease.id}}">{{lease.created|date("d.m.Y")}}</a></td>
+            <td>{{lease.tenant}}</td>
+            <td>{{lease.rent|round}}€</td> 
+            <td>{{lease.start_date}}</td>
+            <td>{{lease.end_date}}</td>
+            <td>                       
+                <form method="post" action="{{base_path}}/units/{{unit.id}}/leases/{{lease.id}}/delete">
+                    <button type="submit" class="btn btn-link float-right">
+                        <span class="glyphicon glyphicon-trash" style="font-size: 1em;color:gray;"></span>
+                    </button>
+                </form>
+                <form method="get" action="{{base_path}}/units/{{unit.id}}/leases/{{lease.id}}/edit">
+                    <button type="submit" class="btn btn-link float-right">
+                        <span class="glyphicon glyphicon-pencil" style="font-size: 1em;color:gray;"></span>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>

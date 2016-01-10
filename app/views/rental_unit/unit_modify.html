@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container container-padding">
+    {% if edit %}
+    <form method="post" action="{{base_path}}/units/{{unit.id}}/edit">
+        {% else %}
+        <form method="post" action="{{base_path}}/units">
+            {% endif %}
+            <div class="row">
+                <div class="col-md-12">
+
+                    {% if errors %}
+                    <div class="alert alert-danger">
+                        {% for error in errors %}
+                        {% if loop.first %}
+                        <h4>{{error[0]}}</h4>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4>Basic information</h4>
+                        </div>
+                        <table class="table table-condensed" style="border:none">
+                            <tr>
+                                <td><strong><label class="form-control" style="border: none;box-shadow: none;">Address</label></strong></td>
+                                <td><input type="text" class="form-control" name="address" value="{{unit.address}}"></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong><label class="form-control" style="border: none;box-shadow: none;">Size</label></strong></td>
+                                <td><input type="number" class="form-control" name="area" value="{{unit.area}}"></td>
+                                <td><label class="form-control" style="border: none;box-shadow: none;">m²</label></td>
+
+                            </tr>
+                            <tr>
+                                <td><strong>Attribute</strong></td>
+                                <td>value €</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Attribute</strong></td>
+                                <td>Long value: Aliquam faucibus, elit ut dictum aliquet, felis nisl 
+                                    adipiscing sapien, sed malesuada diam lacus eget erat. Cras 
+                                    mollis scelerisque nunc.</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Attribute</strong></td>
+                                <td>value</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Attribute</strong></td>
+                                <td>value</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Attribute</strong></td>
+                                <td>value</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Attribute</strong></td>
+                                <td>Long value: Aliquam faucibus, elit ut dictum aliquet, felis nisl 
+                                    adipiscing sapien, sed malesuada diam lacus eget erat. Cras 
+                                    mollis scelerisque nunc. Nullam arcu. Aliquam consequat. 
+                                    Curabitur augue lorem, dapibus quis, laoreet et, pretium ac, 
+                                    nisi. Aenean magna nisl, mollis quis, molestie eu, feugiat in, 
+                                    orci. In hac habitasse platea dictumst.</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Attribute</strong></td>
+                                <td>value</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Attribute</strong></td>
+                                <td>value</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="row padding">
+                        <button type="submit" class="btn btn-primary float-right">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+
+</div>
+
+{% endblock %}

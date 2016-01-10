@@ -13,14 +13,16 @@ class BaseController {
     }
 
     public static function check_logged_in() {
-        // Toteuta kirjautumisen tarkistus tähän.
-        // Jos käyttäjä ei ole kirjautunut sisään, ohjaa hänet toiselle sivulle (esim. kirjautumissivulle).
+        if (!isset($_SESSION['user'])) {
+            Redirect::to('/', array('message' => 'you need to be logged in for that'));
+        }
     }
 
-    public static function permission_to_modify($id) {
+    public static function logged_in_user_is_landlord_of($id) {
         if (!RentalUnit::find($id)->landlord == self::get_user_logged_in()->id) {
-            Redirect::to('/units/' . $id, array('message' => 'insufficient rights'));
-        };
+            return false;
+        }
+        return true;
     }
 
 }

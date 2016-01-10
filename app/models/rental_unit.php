@@ -2,10 +2,16 @@
 
 class RentalUnit extends BaseModel {
 
-    public $id, $title, $description, $address, $advertised_rent, $landlord, $area, $available;
+    public $id, $description_title, $description, $address, $advertised_rent, $landlord, $area, $available;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validation_rules = array(
+            'required' => array(array('address'), array('area')),
+            'numeric' => array(array('area'), array('advertised_rent')),
+            'lengthBetween' => array(array('address', 10, 255)),
+            'lengthMax' => array(array('description_title', 255), array('description', 1000))
+        );
     }
 
     public static function searchAll() {
@@ -28,7 +34,7 @@ class RentalUnit extends BaseModel {
         foreach ($rows as $row) {
             $searchResults[] = new RentalUnit(array(
                 'id' => $row['id'],
-                'title' => $row['description_title'],
+                'description_title' => $row['description_title'],
                 'description' => $row['description'],
                 'address' => $row['address'],
                 'advertised_rent' => $row['advertised_rent'],
@@ -79,15 +85,16 @@ class RentalUnit extends BaseModel {
         if ($row) {
             $rental_unit = new RentalUnit(array(
                 'id' => $row['id'],
-                'title' => $row['description_title'],
+                'description_title' => $row['description_title'],
                 'description' => $row['description'],
                 'address' => $row['address'],
                 'advertised_rent' => $row['advertised_rent'],
                 'area' => $row['area'],
                 'landlord' => $row['landlord']
             ));
+            return $rental_unit;
         }
-        return $rental_unit;
+        return null;
     }
 
     public function save($user_id) {
@@ -104,21 +111,21 @@ class RentalUnit extends BaseModel {
         $this->id = $row['id'];
     }
 
-    public function validateAddress($address) {
-        $this->validate_string_length($address, 10);
-    }
-
     public function updateUnit() {
         $query = DB::connection()->prepare('UPDATE rental_unit '
                 . 'SET '
+                . 'description_title = :description_title, '
+                . 'description = :description, '
+                . 'address = :address, '
                 . 'advertised_rent = :advertised_rent, '
-                . 'description_title = :title, '
-                . 'description = :description '
+                . 'area = :area '
                 . 'WHERE id = :id');
         $query->execute(array(
-            'advertised_rent' => $this->advertised_rent,
-            'title' => $this->title,
+            'description_title' => $this->description_title,
             'description' => $this->description,
+            'address' => $this->address,
+            'advertised_rent' => $this->advertised_rent,
+            'area' => $this->area,
             'id' => $this->id
         ));
     }

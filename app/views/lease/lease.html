@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container container-padding">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <input type="hidden" name="rental_unit" value="{{unit.id}}">
+                <div class="form-group row">
+                    <div class="col-sm-9 col-sm-push-3">
+                        <h2>Agreement of Lease</h2>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <h4><label class="col-sm-3">Landlord</label></h4>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3">Name</label>
+                    <div class="col-sm-9">
+                        <label>{{user.first_name}} {{user.last_name}}</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3">Email</label>
+                    <div class="col-sm-9">
+                        <label>{{user.email}}</label>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <h4><label class="col-sm-3">Tenant</label></h4>
+                </div>
+                <div class="form-group row">
+                    <label for="tenant" class="col-sm-3 form-control-label">Name</label>
+                    <div class="col-sm-9">
+                        <label>{{lease.tenant}}</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-3 form-control-label">Email</label>
+                    <div class="col-sm-9">
+                        <label>{{lease.tenant_email}}</label>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <h4><label class="col-sm-3">Rental unit</label></h4>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Address</label>
+                    <div class="col-sm-9">
+                        <label>{{unit.address}}</label><br>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Size</label>
+                    <div class="col-sm-9">
+                        <label>{{unit.area|round}} m²</label>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <h4><label class="col-sm-3">Terms and Conditions</label></h4>
+                </div>
+                <div class="form-group row">
+                    <label for="rent" class="col-sm-3 form-control-label">Rent</label>
+                    <div class="col-sm-9">
+                        <label>{{lease.rent}}</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="sdate" class="col-sm-3 form-control-label">Start date</label>
+                    <div class="col-sm-9">
+                        <label>{{lease.start_date}}</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="edate" class="col-sm-3 form-control-label">End date</label>
+                    <div class="col-sm-9">
+                        <label>{{lease.end_date}}</label>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Amenities</label>
+                    <div class="col-sm-9">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Electricity
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Water
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Internet
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -15,7 +15,7 @@ CREATE TABLE Rental_unit
 	address varchar(255) NOT NULL,
         area numeric(15,6) NOT NULL,
 	description_title varchar(255),
-	description varchar(255),
+	description varchar(1000),
 	advertised_rent numeric(15,6),
 	landlord int REFERENCES System_user(id)
 );
@@ -29,13 +29,15 @@ CREATE TABLE Amenity
 
 CREATE TABLE Amenity_rental_unit
 (
-	rental_unit int REFERENCES Rental_unit(id),
-	amenity int REFERENCES Amenity(id)
+	rental_unit int REFERENCES Rental_unit(id) ON DELETE CASCADE,
+	amenity int REFERENCES Amenity(id) ON DELETE CASCADE,
+        PRIMARY KEY (rental_unit, amenity)
 );
 
 CREATE TABLE Lease
 (
 	id SERIAL PRIMARY KEY,
+        created date NOT NULL,
         tenant varchar(255) NOT NULL,
         tenant_email varchar(255) NOT NULL,
 	rent numeric(15,6) NOT NULL,
@@ -46,8 +48,9 @@ CREATE TABLE Lease
 
 CREATE TABLE Amenity_lease
 (
-	lease int REFERENCES Lease(id),
-	amenity int REFERENCES Amenity(id)
+	lease int REFERENCES Lease(id) ON DELETE CASCADE,
+	amenity int REFERENCES Amenity(id) ON DELETE CASCADE,
+        PRIMARY KEY (lease, amenity)
 );
 
 CREATE TABLE Photo

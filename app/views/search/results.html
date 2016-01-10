@@ -13,14 +13,13 @@
                 <div class="thumbnail">
                     <img src="{{base_path}}/assets/img/roomthumb.jpg">
                     <div class="caption">
-                        <p>{{result.address}}</p>
-                        <h3>{{result.title}}</h3>
+                        <p>{{result.address|length > 20 ? result.address|slice(0, 20) ~ '...' : result.address}}</p>
                         {% if (result.available is null or date(result.available) < date()) %}
                         <p>Available now</p>
                         {% else %}
                         <p>Available from: {{result.available}}</p>
                         {% endif %}
-                        <p>Rent: {{result.advertised_rent|round}}€</p>
+                        <h4 style="color:limegreen;">{{result.advertised_rent|round}} € a month</h4>
                     </div>
                 </div>
             </a>

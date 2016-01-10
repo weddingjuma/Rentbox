@@ -3,8 +3,8 @@
 {% include 'navbar.html' %}
 
 <div class="container container-padding">
-    
-     <a href="/tsoha/units/new" class="btn btn-primary add-lease-button">Add new rental unit</a>
+
+    <a href="/tsoha/units/new" class="btn btn-primary add-lease-button">Add new rental unit</a>
 
     <div class="row">
         {% for unit in portfolio %}
@@ -13,8 +13,7 @@
                 <div class="thumbnail">
                     <img src="{{base_path}}/assets/img/roomthumb.jpg">
                     <div class="caption">
-                        <p>{{unit.address}}</p>
-                        <h3>{{unit.title}}</h3>
+                        <p>{{unit.address|length > 20 ? unit.address|slice(0, 20) ~ '...' : unit.address}}</p>
                         {% if unit.available is null %}
                         <p>No leases yet</p>
                         {% elseif date(unit.available) < date() %}
@@ -22,7 +21,7 @@
                         {% else %}
                         <p>Available from: {{unit.available}}</p>
                         {% endif %}
-                        <p>Rent: {{unit.advertised_rent|round}}€</p>
+                        <h4 style="color:limegreen;">{{unit.advertised_rent|round}} € a month</h4>
                     </div>
                 </div>
             </a>

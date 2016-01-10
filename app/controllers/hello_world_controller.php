@@ -14,8 +14,10 @@ class HelloWorldController extends BaseController {
         //View::make('helloworld.html');
         $room = RentalUnit::find(2);
         $units = RentalUnit::searchAll();
+        $amenities = Amenity::find_amenities_for_rental_unit(2);
         Kint::dump($room);
         Kint::dump($units);
+        Kint::dump($amenities);
     }
 
     public static function searchResults() {

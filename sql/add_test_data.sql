@@ -39,14 +39,29 @@ VALUES ('1', '1');
 INSERT INTO Amenity_rental_unit (rental_unit, amenity) 
 VALUES ('1', '2');
 
-INSERT INTO Lease (tenant, tenant_email, rent, start_date, end_date, rental_unit)
-VALUES ('Oliver Nääs','naas@hotmail.ee','450','2015-12-20','2016-12-31','1');
+INSERT INTO Amenity_rental_unit (rental_unit, amenity) 
+VALUES ('1', '3');
 
-INSERT INTO Lease (tenant, tenant_email, rent, start_date, end_date, rental_unit)
-VALUES ('Raudo Mägi','magi@hotmail.ee','430','2014-12-20','2015-12-19','1');
+INSERT INTO Amenity_rental_unit (rental_unit, amenity) 
+VALUES ('2', '1');
 
-INSERT INTO Lease (tenant, tenant_email, rent, start_date, end_date, rental_unit)
-VALUES ('Galevi Mono','g-mono@hotmail.ee','460','2014-12-20','2015-12-06','2');
+INSERT INTO Amenity_rental_unit (rental_unit, amenity) 
+VALUES ('3', '2');
+
+INSERT INTO Amenity_rental_unit (rental_unit, amenity) 
+VALUES ('3', '3');
+
+INSERT INTO Amenity_rental_unit (rental_unit, amenity) 
+VALUES ('5', '3');
+
+INSERT INTO Lease (created, tenant, tenant_email, rent, start_date, end_date, rental_unit)
+VALUES ('2013-01-29', 'Oliver Nääs','naas@hotmail.ee','450','2015-12-20','2016-12-31','1');
+
+INSERT INTO Lease (created, tenant, tenant_email, rent, start_date, end_date, rental_unit)
+VALUES ('2007-04-20', 'Raudo Mägi','magi@hotmail.ee','430','2014-12-20','2015-12-19','1');
+
+INSERT INTO Lease (created, tenant, tenant_email, rent, start_date, end_date, rental_unit)
+VALUES ('2004-01-10', 'Galevi Mono','g-mono@hotmail.ee','460','2014-12-20','2015-12-06','2');
 
 INSERT INTO Amenity_lease (lease, amenity) 
 VALUES ('1', '1');

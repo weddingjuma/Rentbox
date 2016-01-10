@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+{% include '/frontpage/navbar.html' %}
+
+{% if login_error %}
+{% include '/frontpage/login_error.html' %}
+{% else %}
+{% include '/frontpage/signup.html' %}
+{% endif %}
+
+
+{% endblock %}

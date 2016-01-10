@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container container-padding">
+
+    {% if errors %}
+    <div class="alert alert-danger">
+        {% for error in errors %}
+        {% if loop.first %}
+        <h4>{{error[0]}}</h4>
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                {% if edit %}
+                <form method="post" action="{{base_path}}/units/{{unit.id}}/leases/{{lease.id}}/edit"->
+                    {% else %}
+                    <form method="post" action="{{base_path}}/units/{{unit.id}}/leases/new">
+                        {% endif %}
+                        <input type="hidden" name="rental_unit" value="{{unit.id}}">
+                        <div class="form-group row">
+                            <div class="col-sm-9 col-sm-push-3">
+                                <h2>Agreement of Lease</h2>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <h4><label class="col-sm-3">Landlord</label></h4>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3">Name</label>
+                            <div class="col-sm-9">
+                                <label>{{user.first_name}} {{user.last_name}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3">Email</label>
+                            <div class="col-sm-9">
+                                <label>{{user.email}}</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <h4><label class="col-sm-3">Tenant</label></h4>
+                        </div>
+                        <div class="form-group row">
+                            <label for="tenant" class="col-sm-3 form-control-label">Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="tenant" placeholder="Tenant's name" value="{{input.tenant}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-3 form-control-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control" name="tenant_email" placeholder="Tenant's email" value="{{input.tenant_email}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <h4><label class="col-sm-3">Rental unit</label></h4>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Address</label>
+                            <div class="col-sm-9">
+                                <label>{{unit.address}}</label><br>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Size</label>
+                            <div class="col-sm-9">
+                                <label>{{unit.area|round}} m²</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <h4><label class="col-sm-3">Terms and Conditions</label></h4>
+                        </div>
+                        <div class="form-group row">
+                            <label for="rent" class="col-sm-3 form-control-label">Rent</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" name="rent" placeholder="{{unit.advertised_rent|round}}" value="{{input.rent}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="sdate" class="col-sm-3 form-control-label">Start date</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" name="start_date" value="{{input.start_date}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="edate" class="col-sm-3 form-control-label">End date</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" name="end_date" value="{{input.end_date}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Amenities</label>
+                            <div class="col-sm-9">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Electricity
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Water
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Internet
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <button type="submit" class="btn btn-secondary">Save</button>
+                            </div>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

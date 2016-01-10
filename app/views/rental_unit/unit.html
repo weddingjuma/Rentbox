@@ -34,28 +34,44 @@
                 <form  method="post" action="{{base_path}}/units/{{unit.id}}">
                     <div class="row">
                         <div class="col-md-12">
-                            <h3 class="float-right" style="color:limegreen;">
+                            <div class="input-group input-group-lg">
                                 {% if landlord.id == user.id %}  
-                                <textarea rows="1" cols="4" maxlength="4" class="textarea" style="text-align: right;padding-right:0.5em;" name="advertised_rent">{{unit.advertised_rent|round}}</textarea>                                 
+                                <input id="advertised_rent" class="form-control" type="number" max="9999" min="0" step="any" name="advertised_rent" value="{{unit.advertised_rent|round}}" style="box-shadow: none;color: limegreen;">                            
                                 {% else %}
-                                <textarea disabled rows="1" cols="4" maxlength="4" class="textarea" style="text-align: right;padding-right:0.5em;" name="advertised_rent">{{unit.advertised_rent|round}}</textarea>                     
+                                <input disabled id="advertised_rent" class="form-control" value="{{unit.advertised_rent|round}}" style="box-shadow: none;color: limegreen;">                     
                                 {% endif %}
-                                € a month 
-                            </h3>
+                                <span class="input-group-addon" id="basic-addon2" style="text-align: left;padding-left: 0px;padding-right: 0px;background:none;border-style: none;border-color: transparent;color: limegreen;">€ a month</span>
+                            </div>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-12">
-                            <label class="checkbox-inline float-right">
-                                <input type="checkbox" id="inlineCheckbox1" value="option1"> Electricity
+                            {% if landlord.id == user.id %} 
+                            {% for amenity in amenities %}
+                            {% if amenity.rental_unit == unit.id %}
+                            <label class="checkbox-inline float-right" title="{{amenity.description}}">
+                                <input type="checkbox" name="amenities[]" value="{{amenity.id}}" checked {{amenity.name}}>{{amenity.name}}
                             </label>
-                            <label class="checkbox-inline float-right">
-                                <input type="checkbox" id="inlineCheckbox2" value="option2"> Water
+                            {% else %}
+                            <label class="checkbox-inline float-right" title="{{amenity.description}}">
+                                <input type="checkbox" name="amenities[]" value="{{amenity.id}}">{{amenity.name}}
                             </label>
-                            <label class="checkbox-inline float-right">
-                                <input type="checkbox" id="inlineCheckbox3" value="option3"> Internet
+                            {% endif %}
+                            {% endfor %}
+                            {% else %}
+                            {% for amenity in amenities %}
+                            {% if amenity.rental_unit == unit.id %}
+                            <label class="checkbox-inline float-right" title="{{amenity.description}}">
+                                <input disabled type="checkbox" checked>{{amenity.name}}
                             </label>
+                            {% else %}
+                            <label class="checkbox-inline float-right" title="{{amenity.description}}">
+                                <input disabled type="checkbox">{{amenity.name}}
+                            </label>
+                            {% endif %}
+                            {% endfor %}
+                            {% endif %}
                         </div>
                     </div>
 
@@ -63,11 +79,11 @@
                         <div class="col-md-12">
                             <blockquote style="font-size: 1em;" class="clearfix">
                                 {% if landlord.id == user.id %}  
-                                <h4><textarea name="title" class="textarea-fullwidth" rows="1" cols="30" maxlength="30" placeholder="Enter title for your unit">{{unit.title}}</textarea></h4>
-                                <p><textarea name="description" class="textarea-fullwidth" rows="10" maxlength="1000" placeholder="Write description of your unit">{{unit.description}}</textarea></p>
+                                <h4><textarea name="description_title" class="textarea-fullwidth" rows="1" cols="30" maxlength="30" placeholder="Enter title for your unit">{{unit.description_title}}</textarea></h4>
+                                <p><textarea name="description" class="textarea-fullwidth" rows="10" maxlength="1000" placeholder="Write description for your unit">{{unit.description}}</textarea></p>
                                 {% else %}
-                                <h4><textarea disabled name="title" class="textarea-fullwidth" rows="1" cols="30" maxlength="30" placeholder="Enter title for your unit">{{unit.title}}</textarea></h4>
-                                <p><textarea disabled name="description" class="textarea-fullwidth" rows="10" maxlength="1000" placeholder="Write description of your unit">{{unit.description}}</textarea></p>
+                                <h4><textarea disabled name="description_title" class="textarea-fullwidth" rows="1" cols="30" maxlength="30" placeholder="No title given yet">{{unit.description_title}}</textarea></h4>
+                                <p><textarea disabled name="description" class="textarea-fullwidth" rows="10" maxlength="1000" placeholder="No description written yet">{{unit.description}}</textarea></p>
                                 {% endif %}
                             </blockquote>
                         </div>
@@ -83,8 +99,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4>Basic information
-                             {% if landlord.id == user.id %} 
-                            <small><span class="glyphicon glyphicon-pencil pull-right"></span></small>
+                            {% if landlord.id == user.id %} 
+                            <a href="{{base_path}}/units/{{unit.id}}/edit"><small><span class="glyphicon glyphicon-pencil pull-right"></span></small></a>
                             {% endif %}
                         </h4>               
                     </div>
@@ -160,7 +176,7 @@
     <hr>
 
     {% if landlord.id == user.id %}
-    {% include '/suunnitelmat/leases.html' %}
+    {% include '/lease/leases.html' %}
     {% endif %}
 </div>
 

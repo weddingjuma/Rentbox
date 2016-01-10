@@ -59,6 +59,18 @@
     color: grey;
 }
 
+#advertised_rent {
+    text-align: right;
+    padding: 0px;
+    margin: 0px;
+    float: left;
+    resize: none;
+    border-style: none; 
+    border-color: transparent; 
+    overflow: auto;
+    background: none;
+}
+
 .textarea {
     padding: 0px;
     margin: 0px;
