@@ -2,14 +2,18 @@
 
 class LeaseController extends BaseController {
 
+    public static function redirect_if_lease_does_not_exist($id) {
+        if (!Lease::find($id)) {
+            Redirect::to('/search/?search_term=');
+        }
+    }
+
     public static function viewLease($id, $leaseId) {
         if (parent::logged_in_user_is_landlord_of($id)) {
-
             $unit = RentalUnit::find($id);
             $lease = Lease::find($leaseId);
-            $amenities = Amenity::find_amenities_for_rental_unit($id);
+            $amenities = Amenity::all_and_check(Amenity::LEASE, $leaseId);
             $user = parent::get_user_logged_in();
-
             View::make('lease/lease.html', array(
                 'lease' => $lease,
                 'unit' => $unit,
@@ -22,11 +26,9 @@ class LeaseController extends BaseController {
 
     public static function newLease($id) {
         if (parent::logged_in_user_is_landlord_of($id)) {
-
             $unit = RentalUnit::find($id);
-            $amenities = Amenity::find_amenities_for_rental_unit($id);
+            $amenities = Amenity::all_and_check(Amenity::RENTAL_UNIT, $id);
             $user = parent::get_user_logged_in();
-
             View::make('lease/lease_modify.html', array(
                 'unit' => $unit,
                 'amenities' => $amenities,
@@ -38,7 +40,6 @@ class LeaseController extends BaseController {
     public static function save() {
         $params = $_POST;
         if (parent::logged_in_user_is_landlord_of($params['rental_unit'])) {
-
             $lease = new Lease(array(
                 'tenant' => $params['tenant'],
                 'tenant_email' => $params['tenant_email'],
@@ -47,9 +48,9 @@ class LeaseController extends BaseController {
                 'end_date' => $params['end_date'],
                 'rental_unit' => $params['rental_unit']
             ));
-
             if ($lease->validate()) {
                 $lease->save();
+                Amenity::update_amenities_of(Amenity::LEASE, $lease->id, $params);
                 Redirect::to('/units/' . $params['rental_unit'], array('message' => 'new lease added'));
             } else {
                 $errors = array_values($lease->errors());
@@ -61,7 +62,6 @@ class LeaseController extends BaseController {
 
     public static function delete($id, $leaseid) {
         if (parent::logged_in_user_is_landlord_of($id)) {
-
             $lease = Lease::find($leaseid);
             $lease->delete();
             Redirect::to('/units/' . $id, array('message' => 'lease deleted'));
@@ -71,12 +71,10 @@ class LeaseController extends BaseController {
 
     public static function editLease($id, $leaseId) {
         if (parent::logged_in_user_is_landlord_of($id)) {
-
             $unit = RentalUnit::find($id);
             $lease = Lease::find($leaseId);
-            $amenities = Amenity::find_amenities_for_rental_unit($id);
+            $amenities = Amenity::all_and_check(Amenity::LEASE, $leaseId);
             $user = parent::get_user_logged_in();
-
             View::make('lease/lease_modify.html', array(
                 'lease' => $lease,
                 'unit' => $unit,
@@ -96,7 +94,6 @@ class LeaseController extends BaseController {
     public static function updateLease($id, $leaseId) {
         $params = $_POST;
         if (parent::logged_in_user_is_landlord_of($id)) {
-
             $lease = new Lease(array(
                 'id' => $leaseId,
                 'tenant' => $params['tenant'],
@@ -106,9 +103,9 @@ class LeaseController extends BaseController {
                 'end_date' => $params['end_date'],
                 'rental_unit' => $params['rental_unit']
             ));
-
             if ($lease->validate()) {
                 $lease->update();
+                Amenity::update_amenities_of(Amenity::LEASE, $leaseId, $params);
                 Redirect::to('/units/' . $params['rental_unit'], array('message' => 'lease updated'));
             } else {
                 $errors = array_values($lease->errors());

@@ -18,6 +18,12 @@ class BaseController {
         }
     }
 
+    public static function logged_in_already() {
+        if (isset($_SESSION['user'])) {
+            Redirect::to('/search/?search_term=');
+        }
+    }
+
     public static function logged_in_user_is_landlord_of($id) {
         if (!RentalUnit::find($id)->landlord == self::get_user_logged_in()->id) {
             return false;

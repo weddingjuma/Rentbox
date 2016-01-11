@@ -2,12 +2,12 @@
 
 class Lease extends BaseModel {
 
-    public $id, $created, $tenant, $tenant_email, $rent, $start_date, $end_date, $rental_unit, $validator;
+    public $id, $created, $tenant, $tenant_email, $rent, $start_date, $end_date, $rental_unit;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
         $this->validation_rules = array(
-            'required' => array( array('tenant'), array('tenant_email'), array('rent'), array('start_date'), array('end_date')),
+            'required' => array(array('tenant'), array('tenant_email'), array('rent'), array('start_date'), array('end_date')),
             'email' => array(array('tenant_email')),
             'numeric' => array(array('rent')),
             'date' => array(array('start_date'), array('end_date'))
@@ -18,7 +18,6 @@ class Lease extends BaseModel {
         $query = DB::connection()->prepare('SELECT * FROM lease WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
-
         if ($row) {
             $lease = new Lease(array(
                 'id' => $row['id'],
@@ -36,12 +35,10 @@ class Lease extends BaseModel {
     }
 
     public static function find_leases_for($id) {
-        $query = DB::connection()->prepare('SELECT * FROM lease WHERE lease.rental_unit = :id;');
+        $query = DB::connection()->prepare('SELECT * FROM lease WHERE lease.rental_unit = :id ORDER BY CREATED DESC;');
         $query->execute(array('id' => $id));
         $rows = $query->fetchAll();
-
         $leases = array();
-
         foreach ($rows as $row) {
             $leases[] = new Lease(array(
                 'id' => $row['id'],
@@ -60,7 +57,8 @@ class Lease extends BaseModel {
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO lease '
                 . '(created, tenant, tenant_email, rent, start_date, end_date, rental_unit) '
-                . 'VALUES (:created, :tenant, :tenant_email, :rent, :start_date, :end_date, :rental_unit);'
+                . 'VALUES (:created, :tenant, :tenant_email, :rent, :start_date, :end_date, :rental_unit)'
+                . 'RETURNING id;'
         );
         $query->execute(array(
             'created' => date("Y-m-d"),
@@ -71,6 +69,8 @@ class Lease extends BaseModel {
             'end_date' => $this->end_date,
             'rental_unit' => $this->rental_unit
         ));
+        $row = $query->fetch();
+        $this->id = $row['id'];
     }
 
     public function delete() {

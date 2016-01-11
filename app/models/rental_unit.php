@@ -14,9 +14,9 @@ class RentalUnit extends BaseModel {
         );
     }
 
-    public static function searchAll() {
+    public static function search($search_term) {
         $query = DB::connection()->prepare(
-                'SELECT * FROM rental_unit
+                'SELECT * FROM (SELECT * FROM rental_unit where address ilike :search_term) as rental_unit
                 LEFT JOIN
                 (SELECT lease1.end_date, lease1.rental_unit
                 FROM lease AS lease1
@@ -27,7 +27,7 @@ class RentalUnit extends BaseModel {
                 AS lease
                 ON rental_unit.id = lease.rental_unit
                 ORDER BY lease.end_date ASC NULLS FIRST;');
-        $query->execute();
+        $query->execute(array('search_term' => '%' . $search_term . '%'));
         $rows = $query->fetchAll();
         $searchResults = array();
 
@@ -81,7 +81,6 @@ class RentalUnit extends BaseModel {
         $query = DB::connection()->prepare('SELECT * FROM rental_unit WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
-
         if ($row) {
             $rental_unit = new RentalUnit(array(
                 'id' => $row['id'],

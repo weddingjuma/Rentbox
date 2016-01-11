@@ -86,21 +86,13 @@
                 <div class="form-group row">
                     <label class="col-sm-3 form-control-label">Amenities</label>
                     <div class="col-sm-9">
+                        {% for amenity in amenities %}
                         <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Electricity
+                            <label title="{{amenity.description}}">
+                                <input disabled type="checkbox" name="amenities[]" value="{{amenity.id}}" {{amenity.checked}}>{{amenity.name}}
                             </label>
                         </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Water
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Internet
-                            </label>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

@@ -8,7 +8,7 @@
 
         <div class="row">
             <div class="col-md-12" style="padding-bottom:0.5em;">
-                {% if landlord.id == user.id %} 
+                {% if disabled == false %} 
                 <form method="post" action="{{base_path}}/units/{{unit.id}}/delete">
                     <button type="submit" class="btn btn-link float-right">
                         <span class="glyphicon glyphicon-trash" style="font-size: 1em;color:gray;"></span>
@@ -24,9 +24,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="jumbotron" style="margin-bottom: 0px;">
-                            <h2>Drag photos here</h2>
-                            <p>or</p>
-                            <p><a class="btn btn-primary btn-lg" href="#" role="button">click here to upload</a></p>
+                            <h2>Space reserved for photo functionality</h2>
+                            <p>and</p>
+                            <p><a class="btn btn-primary btn-lg" href="#" role="button">clicking here doesn't do anything yet</a></p>
                         </div>
                     </div>
                 </div>
@@ -35,11 +35,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="input-group input-group-lg">
-                                {% if landlord.id == user.id %}  
-                                <input id="advertised_rent" class="form-control" type="number" max="9999" min="0" step="any" name="advertised_rent" value="{{unit.advertised_rent|round}}" style="box-shadow: none;color: limegreen;">                            
-                                {% else %}
-                                <input disabled id="advertised_rent" class="form-control" value="{{unit.advertised_rent|round}}" style="box-shadow: none;color: limegreen;">                     
-                                {% endif %}
+                                <input {{disabled}} id="advertised_rent" class="form-control" type="number" max="9999" min="0" step="any" name="advertised_rent" value="{{unit.advertised_rent|round}}" style="box-shadow: none;color: limegreen;">                            
                                 <span class="input-group-addon" id="basic-addon2" style="text-align: left;padding-left: 0px;padding-right: 0px;background:none;border-style: none;border-color: transparent;color: limegreen;">€ a month</span>
                             </div>
                         </div>
@@ -47,48 +43,23 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            {% if landlord.id == user.id %} 
                             {% for amenity in amenities %}
-                            {% if amenity.rental_unit == unit.id %}
                             <label class="checkbox-inline float-right" title="{{amenity.description}}">
-                                <input type="checkbox" name="amenities[]" value="{{amenity.id}}" checked {{amenity.name}}>{{amenity.name}}
+                                <input {{disabled}} type="checkbox" name="amenities[]" value="{{amenity.id}}" {{amenity.checked}}>{{amenity.name}}
                             </label>
-                            {% else %}
-                            <label class="checkbox-inline float-right" title="{{amenity.description}}">
-                                <input type="checkbox" name="amenities[]" value="{{amenity.id}}">{{amenity.name}}
-                            </label>
-                            {% endif %}
                             {% endfor %}
-                            {% else %}
-                            {% for amenity in amenities %}
-                            {% if amenity.rental_unit == unit.id %}
-                            <label class="checkbox-inline float-right" title="{{amenity.description}}">
-                                <input disabled type="checkbox" checked>{{amenity.name}}
-                            </label>
-                            {% else %}
-                            <label class="checkbox-inline float-right" title="{{amenity.description}}">
-                                <input disabled type="checkbox">{{amenity.name}}
-                            </label>
-                            {% endif %}
-                            {% endfor %}
-                            {% endif %}
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-12">
                             <blockquote style="font-size: 1em;" class="clearfix">
-                                {% if landlord.id == user.id %}  
-                                <h4><textarea name="description_title" class="textarea-fullwidth" rows="1" cols="30" maxlength="30" placeholder="Enter title for your unit">{{unit.description_title}}</textarea></h4>
-                                <p><textarea name="description" class="textarea-fullwidth" rows="10" maxlength="1000" placeholder="Write description for your unit">{{unit.description}}</textarea></p>
-                                {% else %}
-                                <h4><textarea disabled name="description_title" class="textarea-fullwidth" rows="1" cols="30" maxlength="30" placeholder="No title given yet">{{unit.description_title}}</textarea></h4>
-                                <p><textarea disabled name="description" class="textarea-fullwidth" rows="10" maxlength="1000" placeholder="No description written yet">{{unit.description}}</textarea></p>
-                                {% endif %}
+                                <h4><textarea {{disabled}} name="description_title" class="textarea-fullwidth" rows="1" cols="30" maxlength="30" placeholder="Enter title for your unit">{{unit.description_title}}</textarea></h4>
+                                <p><textarea {{disabled}} name="description" class="textarea-fullwidth" rows="10" maxlength="1000" placeholder="Write description for your unit">{{unit.description}}</textarea></p>
                             </blockquote>
                         </div>
                     </div>
-                    {% if landlord.id == user.id %}  
+                    {% if disabled == false %}  
                     <button class="btn btn-success" type="submit">Save changes</button>
                     {% endif %}
                 </form>
@@ -99,7 +70,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4>Basic information
-                            {% if landlord.id == user.id %} 
+                            {% if disabled == false %} 
                             <a href="{{base_path}}/units/{{unit.id}}/edit"><small><span class="glyphicon glyphicon-pencil pull-right"></span></small></a>
                             {% endif %}
                         </h4>               
@@ -175,7 +146,7 @@
 
     <hr>
 
-    {% if landlord.id == user.id %}
+    {% if disabled == false %}
     {% include '/lease/leases.html' %}
     {% endif %}
 </div>

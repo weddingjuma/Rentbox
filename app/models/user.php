@@ -46,7 +46,6 @@ class User extends BaseModel {
         $query = DB::connection()->prepare('SELECT * FROM system_user WHERE email = :email LIMIT 1');
         $query->execute(array('email' => $email));
         $row = $query->fetch();
-
         if ($row) {
             $user = new User(array(
                 'id' => $row['id'],

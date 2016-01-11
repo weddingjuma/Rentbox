@@ -58,5 +58,5 @@ CREATE TABLE Photo
 	id SERIAL PRIMARY KEY,
 	url varchar(255) NOT NULL,
 	description varchar(255),
-	rental_unit int REFERENCES Rental_unit(id)
+	rental_unit int REFERENCES Rental_unit(id) ON DELETE CASCADE
 );

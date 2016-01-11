@@ -2,22 +2,32 @@
 
 class RentalUnitController extends BaseController {
 
+    public static function redirect_if_rental_unit_does_not_exist($id) {
+        if (!RentalUnit::find($id)) {
+            Redirect::to('/search/?search_term=');
+        }
+    }
+
     public static function newUnit() {
         View::make('rental_unit/unit_modify.html');
     }
 
     public static function viewUnit($id) {
         $unit = RentalUnit::find($id);
-        $amenities = Amenity::find_amenities_for_rental_unit($id);
+        $amenities = Amenity::all_and_check(Amenity::RENTAL_UNIT, $id);
         $landlord = User::find($unit->landlord);
         $user = parent::get_user_logged_in();
         $leases = Lease::find_leases_for($id);
+        $disabled = null;
+        if ($user->id != $landlord->id) {
+            $disabled = 'disabled';
+        }
         View::make('rental_unit/unit.html', array(
             'unit' => $unit,
             'amenities' => $amenities,
             'landlord' => $landlord,
-            'user' => $user,
-            'leases' => $leases));
+            'leases' => $leases,
+            'disabled' => $disabled));
     }
 
     public static function save() {
@@ -42,21 +52,13 @@ class RentalUnitController extends BaseController {
             $unit->description_title = $params['description_title'];
             $unit->description = $params['description'];
             $unit->advertised_rent = $params['advertised_rent'];
-
             if ($unit->validate()) {
                 $unit->updateUnit();
             } else {
                 $errors = array_values($unit->errors());
                 Redirect::to('/units/' . $unit->id, array('errors' => $errors));
             }
-            AmenityRentalUnit::delete_amenities_of($id);
-            if (isset($params['amenities'])) {
-                foreach ($params['amenities'] as $amenity) {
-                    if ($amenity) {
-                        AmenityRentalUnit::create($id, $amenity);
-                    }
-                }
-            }
+            Amenity::update_amenities_of(Amenity::RENTAL_UNIT, $id, $params);
             Redirect::to('/units/' . $unit->id, array('message' => 'rental unit updated'));
         }
         Redirect::to('/units/' . $id, array('message' => 'insufficient rights'));

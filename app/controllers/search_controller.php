@@ -3,7 +3,8 @@
 class SearchController extends BaseController {
 
     public static function all() {
-        $searchResults = RentalUnit::searchAll();
+        $params = $_GET;
+        $searchResults = RentalUnit::search($params['search_term']);
         View::make('search/results.html', array('searchResults' => $searchResults));
     }
 
