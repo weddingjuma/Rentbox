@@ -74,7 +74,7 @@ $routes->get('/units/:id/leases/new', 'check_logged_in', function($id) {
     LeaseController::newLease($id);
 });
 
-$routes->post('/units/:id/leases/new', 'check_logged_in', function() {
+$routes->post('/units/:id/leases/new', 'check_logged_in', function($id) {
     RentalUnitController::redirect_if_rental_unit_does_not_exist($id);
     LeaseController::save();
 });
