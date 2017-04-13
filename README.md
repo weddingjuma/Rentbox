@@ -1,24 +1,21 @@
-# Tietokantasovelluksen esittelysivu
+# Database application
 
-Yleisiä linkkejä:
-* [Linkki sovellukseeni](http://jussivii.users.cs.helsinki.fi/tsoha/)
-  * Käyttäjätunnus: vuokra.loordi@gmail.com
-  * Salasana: salaissana
-* [Linkki dokumentaatiooni](https://github.com/eeaa/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
+General links:
+* [Application](http://jussivii.users.cs.helsinki.fi/tsoha/)
+  * Username: vuokra.loordi@gmail.com
+  * Password: salaissana
+* [Documentation](https://github.com/eeaa/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
-## Työn aihe
+## Topic of the project
 
-Järjestelmällä hallitaan vuokra-asuntoportfoliota. 
-Järjestelmään rekisteröitynyt käyttäjä voi lisätä portfolioonsa vuokrakohteita. 
-Vuokrakohteisiin voi lisätä vuokrasopimuksia. 
-Vuokrasopimukseen sisältyy vuokralaisen nimi, kuukausittainen vuokra, sopimuksen alkamis- ja loppumispäivät, sekä 
-vuokrattavan kohteen lisäksi vuokraan kuuluvat muut hyödykkeet (sähkö, vesi, jne). 
+The application can be used to manage rental portfolios.
+Registered users can add rental units to their portfolios and leases to the rental units. 
+Leases include the tenants name, monthly rent, the beginning and termination days of the lease and the amenities included (electricity, water, etc). 
 
-Rekisteröitynyt käyttäjä voi myös hakea julkiset tiedot kaikkien käyttäjien palveluun
-listaamista vuokrakohteista.
+A registered user can also list public information of all the rental units added to the application.
 
-Työ toteutetaan PHP:llä. Tietokantapalvelimena käytetään PostgreSQL:ää. Työ pystytetään users-palvelimelle.
+The application is written in PHP and uses PostgreSQL. The application is hosted at the Users server at the Department of Computer Science.
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons -lisenssi" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />Tämä teos, jonka tekijä on <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Jussi Viinikka</span>, on lisensoitu <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Nimeä-EiKaupallinen-EiMuutoksia 4.0 Kansainvälinen  -lisenssillä</a>.
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons -lisenssi" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />This work created by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Jussi Viinikka</span> is released under the <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Attribution-NonCommercial-NoDerivatives 4.0 International license</a>.
 
  
