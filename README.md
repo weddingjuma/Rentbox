@@ -1,4 +1,4 @@
-# Database application
+# Database Application Course Project
 
 General links:
 * [Application](http://jussivii.users.cs.helsinki.fi/tsoha/)
